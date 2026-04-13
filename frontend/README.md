@@ -44,5 +44,10 @@ This repository includes Vercel configuration for both repository-root and `fron
 2. You can deploy with project root as repository root **or** `frontend/`.
 3. Deploy (Vercel uses `vercel.json` automatically).
 
+Notes:
+- Root deployment uses `/vercel.json` and `cd frontend` commands.
+- `frontend/` root deployment uses `/frontend/vercel.json`.
+- Both configs include `/promo-engine/(.*) -> /$1` so old GitHub Pages-style links keep working on Vercel.
+
 ---
 *Created by [nazarkoui](https://github.com/nazarkoui)*
