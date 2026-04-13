@@ -18,7 +18,7 @@ Visit the live interactive prototype:
 - **Frontend**: React 19, TypeScript
 - **Styling**: Tailwind CSS / Vanilla CSS
 - **Build Tool**: Vite
-- **Deployment**: GitHub Pages (Automated via GitHub Actions)
+- **Deployment**: GitHub Pages (Automated via GitHub Actions), Vercel
 
 ## 🚀 Getting Started
 
@@ -35,6 +35,19 @@ Visit the live interactive prototype:
    ```bash
    npm run dev
    ```
+
+## ▲ Deploying on Vercel
+
+This repository includes Vercel configuration for both repository-root and `frontend/` root-directory deployments.
+
+1. Import the repository into Vercel.
+2. You can deploy with project root as repository root **or** `frontend/`.
+3. Deploy (Vercel uses `vercel.json` automatically).
+
+Notes:
+- Root deployment uses `/vercel.json` and `cd frontend` commands.
+- `frontend/` root deployment uses `/frontend/vercel.json`.
+- Both configs include `/promo-engine/(.*) -> /$1` so old GitHub Pages-style links keep working on Vercel.
 
 ---
 *Created by [nazarkoui](https://github.com/nazarkoui)*
