@@ -38,10 +38,10 @@ Visit the live interactive prototype:
 
 ## ▲ Deploying on Vercel
 
-This repository includes a root `vercel.json` that builds from `frontend/` and serves `frontend/dist`.
+This repository includes Vercel configuration for both repository-root and `frontend/` root-directory deployments.
 
 1. Import the repository into Vercel.
-2. Keep the project root at the repository root.
+2. You can deploy with project root as repository root **or** `frontend/`.
 3. Deploy (Vercel uses `vercel.json` automatically).
 
 ---
