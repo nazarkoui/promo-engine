@@ -32,7 +32,17 @@ export const massivePromoList = [
   { id: 'PR-9999', name: 'The Enterprise Mega-Stack', type: 'Hybrid Mechanic', status: 'Draft', rules: 8, conflicts: 3 }
 ];
 
-export const promoDetailsDB: Record<string, any> = {
+interface PromoDetail {
+  name: string;
+  start: string;
+  end: string;
+  description: string;
+  priority?: string;
+  tiers: { name: string; defaultAction: string; defaultProducts: string }[];
+  constraints: unknown[];
+}
+
+export const promoDetailsDB: Record<string, PromoDetail> = {
   'PR-1031': {
     name: '20% Off Selected Product Lines',
     start: '2023-01-01', end: 'Ongoing',

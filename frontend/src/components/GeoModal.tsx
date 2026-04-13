@@ -10,12 +10,14 @@ export function GeoModal({ onClose }: { onClose: () => void }) {
   const [includes, setIncludes] = useState<string[]>(['EU Baseline (EMEA)']);
   const [excludes, setExcludes] = useState<string[]>(['B2B Tenders']);
 
+  interface GeoNode { id: string; name: string; children?: GeoNode[] }
+
   // Recursive Tree Component
-  const TreeNode = ({ node, level = 0 }: { node: any, level?: number }) => {
+  const TreeNode = ({ node, level = 0 }: { node: GeoNode, level?: number }) => {
     const isLeaf = !node.children || node.children.length === 0;
     
     // Hide node if it doesn't match search (and none of its children do)
-    const matchesSearch = (n: any): boolean => {
+    const matchesSearch = (n: GeoNode): boolean => {
       if (n.name.toLowerCase().includes(search.toLowerCase())) return true;
       if (n.children) return n.children.some(matchesSearch);
       return false;
@@ -34,7 +36,7 @@ export function GeoModal({ onClose }: { onClose: () => void }) {
         </div>
         {node.children && node.children.length > 0 && (
           <div className="flex-col w-full">
-            {node.children.map((child: any) => (
+            {node.children.map((child: GeoNode) => (
               <TreeNode key={child.id} node={child} level={level + 1} />
             ))}
           </div>
@@ -86,7 +88,7 @@ export function GeoModal({ onClose }: { onClose: () => void }) {
                   {geoTreeDB.map(node => (
                     <TreeNode key={node.id} node={node} />
                   ))}
-                  {search && geoTreeDB.every(n => !n.name.toLowerCase().includes(search.toLowerCase()) && !n.children?.some((c:any) => c.name.toLowerCase().includes(search.toLowerCase()))) && (
+                  {search && geoTreeDB.every(n => !n.name.toLowerCase().includes(search.toLowerCase()) && !n.children?.some((c: GeoNode) => c.name.toLowerCase().includes(search.toLowerCase()))) && (
                      <div className="p-4 text-center text-outline text-sm">No regions match "{search}"</div>
                   )}
                 </div>
