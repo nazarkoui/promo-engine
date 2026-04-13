@@ -214,11 +214,11 @@ export function PromoEditor({ promoId, onBack }: { promoId: string, onBack: () =
                 <div className="flex gap-4 mt-2">
                   <div className="input-group flex-1" style={{ zIndex: 10 }}>
                     <label className="label text-success">+ Include List</label>
-                    <AutocompleteInput dictionary={promoDictionary} placeholder="Search promo..." />
+                    <AutocompleteInput dictionary={promoDictionary} placeholder="Search promo..." onSelect={() => {}} />
                   </div>
                   <div className="input-group flex-1" style={{ zIndex: 9 }}>
                     <label className="label text-error">- Exclude List</label>
-                    <AutocompleteInput dictionary={promoDictionary} placeholder="Search promo..." />
+                    <AutocompleteInput dictionary={promoDictionary} placeholder="Search promo..." onSelect={() => {}} />
                   </div>
                 </div>
               )}
