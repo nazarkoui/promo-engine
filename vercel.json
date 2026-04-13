@@ -5,10 +5,6 @@
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
-      "source": "/promo-engine",
-      "destination": "/"
-    },
-    {
       "source": "/promo-engine/(.*)",
       "destination": "/$1"
     },
