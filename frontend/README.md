@@ -18,7 +18,7 @@ Visit the live interactive prototype:
 - **Frontend**: React 19, TypeScript
 - **Styling**: Tailwind CSS / Vanilla CSS
 - **Build Tool**: Vite
-- **Deployment**: GitHub Pages (Automated via GitHub Actions)
+- **Deployment**: GitHub Pages (Automated via GitHub Actions), Vercel
 
 ## 🚀 Getting Started
 
@@ -35,6 +35,14 @@ Visit the live interactive prototype:
    ```bash
    npm run dev
    ```
+
+## ▲ Deploying on Vercel
+
+This repository includes a root `vercel.json` that builds from `frontend/` and serves `frontend/dist`.
+
+1. Import the repository into Vercel.
+2. Keep the project root at the repository root.
+3. Deploy (Vercel uses `vercel.json` automatically).
 
 ---
 *Created by [nazarkoui](https://github.com/nazarkoui)*
