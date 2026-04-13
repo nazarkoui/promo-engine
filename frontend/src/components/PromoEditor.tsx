@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { ArrowLeft, Check, X, MapPin, Store, AlertTriangle, Save, Gift, Plus, Trash2 } from 'lucide-react';
 import { 
   massiveInclusions, 
@@ -63,15 +63,19 @@ function ConditionRow({ isFirst, onRemove }: { isFirst: boolean, onRemove: () =>
   );
 }
 
+interface Tier { name: string; defaultAction: string; defaultProducts: string }
+interface Constraint { id: number; type: string; attribute: string; field: string; operator: string; value: string }
+
 function LogicTier({ defaultAction = 'discount', tierName = 'Tier', onRemove }: { defaultAction?: string, tierName?: string, onRemove?: () => void }) {
+  const uid = useId();
   const [actionType, setActionType] = useState(defaultAction);
-  const [conditions, setConditions] = useState([{ id: Date.now() }]);
+  const [conditions, setConditions] = useState([{ id: `${uid}-0` }]);
 
   const addCondition = () => {
-    setConditions([...conditions, { id: Date.now() }]);
+    setConditions(prev => [...prev, { id: `${uid}-${prev.length}` }]);
   };
 
-  const removeCondition = (idToRemove: number) => {
+  const removeCondition = (idToRemove: string) => {
     setConditions(conditions.filter(c => c.id !== idToRemove));
   };
 
@@ -152,8 +156,8 @@ export function PromoEditor({ promoId, onBack }: { promoId: string, onBack: () =
   const detail = getPromoDetails(promoId);
 
   // Mutable State for Dynamic Tiers and Constraints
-  const [tiers, setTiers] = useState<any[]>(detail.tiers || []);
-  const [constraints, setConstraints] = useState<any[]>([
+  const [tiers, setTiers] = useState<Tier[]>(detail.tiers || []);
+  const [constraints, setConstraints] = useState<Constraint[]>([
     { id: 1, type: 'EXCLUDE', attribute: 'Dimensions (Width/Drop)', field: 'Dimensions', operator: 'GREATER THAN', value: '350cm' }
   ]);
 
@@ -263,7 +267,7 @@ export function PromoEditor({ promoId, onBack }: { promoId: string, onBack: () =
         <h3 className="text-xl font-bold flex items-center gap-2">Calculation Rulesets</h3>
         <p className="text-sm text-on-surface-variant">Tiers are evaluated sequentially. Complex stacking is managed via the boundaries above.</p>
         
-        {tiers.map((t: any, i: number) => (
+        {tiers.map((t: Tier, i: number) => (
           <LogicTier 
             key={`tier-${promoId}-${i}`} 
             defaultAction={t.defaultAction} 
